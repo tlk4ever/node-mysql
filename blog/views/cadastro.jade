@@ -1,0 +1,12 @@
+
+html
+    title Cadastro de Notícias
+    body
+    
+    a(href='cadastro/criar') Criar
+    p Clique na notícia para atulizar
+    ul
+        each item in itens
+            li 
+                a(href='cadastro/atualizar/#{item.ID}') #{item.TITULO}
+                    

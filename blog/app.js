@@ -32,8 +32,23 @@ var con = mysql.createConnection({
 
 con.connect();
 var listBlog = 'SELECT * FROM POST ORDER BY DATA DESC';
+var lerBlog = 'SELECT * FROM POST WHERE ID = ?';
+var listaAutor = 'SELECT * FROM AUTOR ORDER BY NOME DESC';
+
 app.get('/index', function (req, res) {
-    con.query(listBlog, function (err, results, fields) {
+    con.query(listBlog, function (err, results) {
+        if (err)
+            throw err;
+
+        res.render('index', {
+            itens: results,
+            title: 'BLOG',
+            h1: 'Lista de Posts'
+        });
+    });
+});
+app.get('/', function (req, res) {
+    con.query(listBlog, function (err, results) {
         if (err)
             throw err;
 
@@ -45,7 +60,42 @@ app.get('/index', function (req, res) {
     });
 });
 
-app.use('/', index);
+app.get('/blog/:id',function(req,res){
+    var id = req.params.id;
+    con.query(lerBlog,[id],function(err,results){
+        if (err)
+            throw err;
+        
+        var result = results[0];
+        res.render('blog',{
+            item: result
+        });
+    });
+});
+
+app.get('/cadastro',function(req,res){
+     con.query(listBlog, function (err, results) {
+        if (err)
+            throw err;
+
+        res.render('cadastro', {
+            itens: results,
+            h1: 'Lista de Posts'
+        });
+    });
+});
+app.get('/cadastro/criar',function(req,res){
+     con.query(listaAutor, function (err, results) {
+        if (err)
+            throw err;
+
+        res.render('criar', {
+            itens: results
+        });
+    });
+});
+
+
 app.use('/users', users);
 
 

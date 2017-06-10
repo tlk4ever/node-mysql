@@ -1,0 +1,20 @@
+
+     
+
+html
+    title TODO supply a title
+    body
+    h1 Criar post
+    form(action='blog/add',method='POST')
+        label Titulo: <br>
+            input(type='text', name='TITULO')
+        br
+        label Conteudo <br>
+            textarea(name='CORPO',cols='100',rows='20') 
+        br
+        label Autor <br>
+            select(name='AUTOR')
+                option(value='0') Selecione
+                each item in itens
+                    option(value= '#{item.ID}') #{item.NOME}
+            
