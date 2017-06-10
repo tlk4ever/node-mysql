@@ -6,7 +6,6 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mysql = require('mysql');
 var jade = require('jade');
-var index = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
@@ -34,6 +33,9 @@ con.connect();
 var listBlog = 'SELECT * FROM POST ORDER BY DATA DESC';
 var lerBlog = 'SELECT * FROM POST WHERE ID = ?';
 var listaAutor = 'SELECT * FROM AUTOR ORDER BY NOME DESC';
+var insertPost = 'INSERT INTO POST (TITULO,CORPO,AUTOR_ID) VALUES (?,?,?)';
+var updatePost = 'UPDATE POST SET TITULO = ? , CORPO = ? WHERE ID = ? ';
+var deletarPost = 'DELETE FROM POST WHERE ID = ?';
 
 app.get('/index', function (req, res) {
     con.query(listBlog, function (err, results) {
@@ -60,21 +62,21 @@ app.get('/', function (req, res) {
     });
 });
 
-app.get('/blog/:id',function(req,res){
+app.get('/blog/:id', function (req, res) {
     var id = req.params.id;
-    con.query(lerBlog,[id],function(err,results){
+    con.query(lerBlog, [id], function (err, results) {
         if (err)
             throw err;
-        
+
         var result = results[0];
-        res.render('blog',{
+        res.render('blog', {
             item: result
         });
     });
 });
 
-app.get('/cadastro',function(req,res){
-     con.query(listBlog, function (err, results) {
+app.get('/cadastro', function (req, res) {
+    con.query(listBlog, function (err, results) {
         if (err)
             throw err;
 
@@ -84,8 +86,8 @@ app.get('/cadastro',function(req,res){
         });
     });
 });
-app.get('/cadastro/criar',function(req,res){
-     con.query(listaAutor, function (err, results) {
+app.get('/cadastro/criar', function (req, res) {
+    con.query(listaAutor, function (err, results) {
         if (err)
             throw err;
 
@@ -95,6 +97,43 @@ app.get('/cadastro/criar',function(req,res){
     });
 });
 
+app.post('/cadastro/add', function (req, res) {
+    var titulo = req.body.TITULO;
+    var corpo = req.body.CORPO;
+    var autor = req.body.AUTOR;
+
+    con.query(insertPost, [titulo, corpo, autor]);
+    res.redirect('/cadastro');
+});
+
+app.get('/cadastro/atualizar/:id', function (req, res) {
+    var id = req.params.id;
+    con.query(lerBlog, [id], function (err, results) {
+        if (err)
+            throw err;
+
+
+        var result = results[0];
+        res.render('atualizar', {
+            item: result
+        });
+    });
+});
+
+app.post('/cadastro/atualizar/update', function (req, res) {
+    var titulo = req.body.TITULO;
+    var corpo = req.body.CORPO;
+    var id = req.body.ID;
+    
+    con.query(updatePost, [titulo, corpo, id]);
+    res.redirect('/cadastro');
+});
+
+app.get('/cadastro/delete/:id',function(req,res){
+    var id = req.params.id;
+    con.query(deletarPost,[id]);
+    res.redirect('/cadastro');
+});
 
 app.use('/users', users);
 

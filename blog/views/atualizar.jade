@@ -1,0 +1,18 @@
+
+     
+
+html
+    title Cadastrar Post
+    body
+    h1 Criar post
+    form(action='update',method='POST')
+        input(type='hidden',name="ID", value='#{item.ID}')
+        label Titulo: <br>
+            input(type='text', name='TITULO', value='#{item.TITULO}')
+        br
+        label Conteudo <br>
+            textarea(name='CORPO',cols='100',rows='20') #{item.CORPO}
+        
+        br
+        input(type='submit', value='atualizar')
+            

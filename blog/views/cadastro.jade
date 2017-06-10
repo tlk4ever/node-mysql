@@ -9,4 +9,6 @@ html
         each item in itens
             li 
                 a(href='cadastro/atualizar/#{item.ID}') #{item.TITULO}
+                    span / 
+                a(href='cadastro/delete/#{item.ID}') Deletar?
                     

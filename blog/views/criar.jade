@@ -2,10 +2,10 @@
      
 
 html
-    title TODO supply a title
+    title Cadastrar Post
     body
     h1 Criar post
-    form(action='blog/add',method='POST')
+    form(action='add',method='POST')
         label Titulo: <br>
             input(type='text', name='TITULO')
         br
@@ -17,4 +17,7 @@ html
                 option(value='0') Selecione
                 each item in itens
                     option(value= '#{item.ID}') #{item.NOME}
+        br
+        br
+        input(type='submit', value='cadastrar')
             
