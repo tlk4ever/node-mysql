@@ -1,0 +1,8 @@
+html
+    title= title
+    body
+        h1= h1
+            ul
+               each item in itens
+                li 
+                    a(href='blog/#{item.ID}') #{item.TITULO}
