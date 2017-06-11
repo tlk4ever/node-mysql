@@ -27,7 +27,7 @@ CREATE TABLE `login` (
   `SENHA` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
+INSERT INTO LOGIN (LOGIN,SENHA) VALUES('thiago','123456');
 #
 # Structure for table "post"
 #

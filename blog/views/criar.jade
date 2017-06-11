@@ -1,23 +1,22 @@
-
-     
-
 html
     title Cadastrar Post
+    link(href='/stylesheets/bootstrap.min.css', rel='stylesheet')
+    link(href='/stylesheets/style.css', rel='stylesheet')
     body
-    h1 Criar post
-    form(action='add',method='POST')
-        label Titulo: <br>
-            input(type='text', name='TITULO')
-        br
-        label Conteudo <br>
-            textarea(name='CORPO',cols='100',rows='20') 
-        br
-        label Autor <br>
-            select(name='AUTOR')
-                option(value='0') Selecione
-                each item in itens
-                    option(value= '#{item.ID}') #{item.NOME}
-        br
-        br
-        input(type='submit', value='cadastrar')
-            
+        div.container
+            div.row
+                h1 Criar post
+                form(action='add',method='POST')
+                    div.form-group.col-md-12
+                        label Titulo:
+                        input.form-control(type='text', name='TITULO')
+                     div.form-group.col-md-12
+                        label Conteudo
+                        textarea.form-control(name='CORPO',rows='20') 
+                    div.form-group.col-md-12
+                        label Autor
+                        select.form-control(name='AUTOR')
+                            option(value='0') Selecione
+                            each item in itens
+                                option(value= '#{item.ID}') #{item.NOME}
+                    input.btn.btn-default(type='submit', value='cadastrar')

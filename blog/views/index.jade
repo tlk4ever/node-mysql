@@ -1,10 +1,14 @@
 html
     title= title
+    link(href='./stylesheets/bootstrap.min.css', rel='stylesheet')
+    link(href='./stylesheets/style.css', rel='stylesheet')
     body
-        h1= h1
+        div.container
+            div.row
+                h1.col-md-12= h1
         
-        a(href='/cadastro') Cadastro
-        ul
-           each item in itens
-            li 
-                a(href='blog/#{item.ID}') #{item.TITULO}
+                a.btn.btn-primary.cadastar(href='/login') Cadastro
+                ul.list-unstyled
+                   each item in itens
+                    li.btn.btn-default.col-md-12
+                        a(href='blog/#{item.ID}') #{item.TITULO}

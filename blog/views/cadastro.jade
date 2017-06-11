@@ -1,14 +1,20 @@
 
 html
     title Cadastro de Notícias
+    link(href='/stylesheets/bootstrap.min.css', rel='stylesheet')
+    link(href='/stylesheets/style.css', rel='stylesheet')
     body
     
-    a(href='cadastro/criar') Criar
-    p Clique na notícia para atulizar
-    ul
-        each item in itens
-            li 
-                a(href='cadastro/atualizar/#{item.ID}') #{item.TITULO}
-                    span / 
-                a(href='cadastro/delete/#{item.ID}') Deletar?
+    div.container
+        div.row
+            a.btn.btn-default.col-md-2(href='cadastro/criar') Criar
+            h2.col-md-12 Clique na notícia para atulizar
+            table.table
+                each item in itens
+                    tr
+                        td.col-md-10 
+                            a.col-md-12(href='cadastro/atualizar/#{item.ID}') #{item.TITULO}
+                        td.col-md-2
+                            a.btn.btn-danger(href='cadastro/delete/#{item.ID}') Deletar?
+                            
                     

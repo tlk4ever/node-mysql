@@ -4,5 +4,19 @@ body {
 }
 
 a {
-  color: #00B7FF;
+  color: #000;
+}
+.cadastar{
+    margin: 20px 0;
+}
+h1{
+    border-bottom:1px solid;
+}
+ul li{
+    margin-bottom: 20px !important;
+    text-align: left !important;
+}
+.conteudo{
+    margin: 20px 0;
+    padding: 20px;
 }

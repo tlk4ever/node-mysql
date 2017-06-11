@@ -36,6 +36,7 @@ var listaAutor = 'SELECT * FROM AUTOR ORDER BY NOME DESC';
 var insertPost = 'INSERT INTO POST (TITULO,CORPO,AUTOR_ID) VALUES (?,?,?)';
 var updatePost = 'UPDATE POST SET TITULO = ? , CORPO = ? WHERE ID = ? ';
 var deletarPost = 'DELETE FROM POST WHERE ID = ?';
+var loginSql = 'SELECT * FROM LOGIN WHERE LOGIN = ? AND SENHA = ? ';
 
 app.get('/index', function (req, res) {
     con.query(listBlog, function (err, results) {
@@ -59,6 +60,27 @@ app.get('/', function (req, res) {
             title: 'BLOG',
             h1: 'Lista de Posts'
         });
+    });
+});
+
+app.get('/login',function(req,res){
+    res.render('login');
+});
+
+app.post('/entrar',function(req,res){
+    var login = req.body.LOGIN;
+    var senha = req.body.SENHA;
+    
+    con.query(loginSql,[login,senha],function(err,result){
+        if (err)
+            throw err;
+        
+        if(result.length>0){
+            res.redirect('/cadastro');
+        }else{
+            res.redirect('/index');
+        }
+        
     });
 });
 
@@ -101,8 +123,9 @@ app.post('/cadastro/add', function (req, res) {
     var titulo = req.body.TITULO;
     var corpo = req.body.CORPO;
     var autor = req.body.AUTOR;
-
-    con.query(insertPost, [titulo, corpo, autor]);
+    if(autor!=null){
+        con.query(insertPost, [titulo, corpo, autor]);
+    }
     res.redirect('/cadastro');
 });
 

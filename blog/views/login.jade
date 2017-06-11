@@ -1,0 +1,20 @@
+
+
+html
+    title Login
+    link(href='/stylesheets/bootstrap.min.css', rel='stylesheet')
+    link(href='/stylesheets/style.css', rel='stylesheet')
+    body
+    
+    div.container
+        div.row
+            h1 Faça Login
+            div.col-md-6
+                form(action='entrar', method='POST')
+                    div.form-group.col-md-12
+                        label Login 
+                        input.form-control(type='text', name='LOGIN')
+                    div.form-group.col-md-12
+                        label Senha
+                        input.form-control(tyoe='password',name='SENHA')
+                    input.btn.btn-default.col-md-2(type='submit', value='Entrar')

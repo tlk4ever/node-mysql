@@ -1,12 +1,15 @@
 
 html
     title= item.TITULO
+    link(href='/stylesheets/bootstrap.min.css', rel='stylesheet')
+    link(href='/stylesheets/style.css', rel='stylesheet')
     body
     
-    div.coutendo
-        h1= item.TITULO
-        span.data= item.DATA
+    div.container
+       div.row
+        h1.col-md-12= item.TITULO
+        span.col-md-3.col-md-offset-9= item.DATA
             
-        div.texto= item.CORPO
+        div.col-md-12.conteudo= item.CORPO
         
-    a(href='/index') Voltar
+        a(href='/index').col-md-1.col-md-offset-11.btn.btn-default Voltar
