@@ -36,7 +36,7 @@ var listaAutor = 'SELECT * FROM AUTOR ORDER BY NOME DESC';
 var insertPost = 'INSERT INTO POST (TITULO,CORPO,AUTOR_ID) VALUES (?,?,?)';
 var updatePost = 'UPDATE POST SET TITULO = ? , CORPO = ? WHERE ID = ? ';
 var deletarPost = 'DELETE FROM POST WHERE ID = ?';
-var loginSql = 'SELECT * FROM LOGIN WHERE LOGIN = ? AND SENHA = ? ';
+var loginSql = 'SELECT * FROM AUTOR WHERE ID = (SELECT AUTOR_ID FROM LOGIN WHERE LOGIN = ? AND SENHA = ? )';
 
 app.get('/index', function (req, res) {
     con.query(listBlog, function (err, results) {
